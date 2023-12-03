@@ -21,4 +21,9 @@ public class CampsiteService {
 	public List<Campsite> getFromKeyword(String keyword) {
 		return campRepo.findCampsiteByAddressContaining(keyword);
 	}
+	
+	public String join(String username, String password, String passwordConfirm) {
+		
+		return null;
+	}
 }
