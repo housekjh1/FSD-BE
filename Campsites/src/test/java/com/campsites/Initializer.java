@@ -6,21 +6,41 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.campsites.domain.Comment;
 import com.campsites.domain.Member;
 import com.campsites.domain.Role;
+import com.campsites.persistence.CampsiteRepository;
+import com.campsites.persistence.CommentRepository;
 import com.campsites.persistence.MemberRepository;
 
 @SpringBootTest
 public class Initializer {
-	
+
 	@Autowired
 	MemberRepository memRepo;
-	
+
+	@Autowired
+	CampsiteRepository camRepo;
+
+	@Autowired
+	CommentRepository comRepo;
+
 	private PasswordEncoder encoder = new BCryptPasswordEncoder();
-	
+
 	@Test
 	public void doWork() {
-		memRepo.save(Member.builder().username("admin").password(encoder.encode("abcd")).role(Role.ROLE_ADMIN).build());
-		memRepo.save(Member.builder().username("member").password(encoder.encode("abcd")).role(Role.ROLE_MEMBER).build());
+		Member admin = Member.builder().username("admin").password(encoder.encode("abcd")).role(Role.ROLE_ADMIN)
+				.build();
+		Member member = Member.builder().username("member").password(encoder.encode("abcd")).role(Role.ROLE_MEMBER)
+				.build();
+		memRepo.save(admin);
+		memRepo.save(member);
+
+		Comment test1 = Comment.builder().campsiteName("(주)대명호텔앤리조트 양평지점").writer(admin.getUsername()).content("댓글1")
+				.build();
+		comRepo.save(test1);
+		Comment test2 = Comment.builder().campsiteName("(주)대산기획피케이씨").writer(member.getUsername()).content("댓글2")
+				.build();
+		comRepo.save(test2);
 	}
 }
