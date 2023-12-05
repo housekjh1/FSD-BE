@@ -33,7 +33,7 @@ public class Campsite {
 	private Integer numSink;
 	private Integer numFireExtinguisher;
 	private Integer numFireExtinguisherWater;
-	private Integer numFireman;
+	private Integer numFireSand;
 	private Integer numFireDetector;
 	private String OtherFacilities1;
 	private String OtherFacilities2;
