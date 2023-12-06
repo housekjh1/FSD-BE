@@ -36,10 +36,10 @@ public class Initializer {
 		memRepo.save(admin);
 		memRepo.save(member);
 
-		Comment test1 = Comment.builder().campsiteName("(주)대명호텔앤리조트 양평지점").writer(admin.getUsername()).content("댓글1")
+		Comment test1 = Comment.builder().campsiteName("(주)대산기획피케이씨").writer(admin.getUsername()).content("너무 만족스러운 캠핑이었습니다. 시설이 깨끗하고 좋아요.")
 				.build();
 		comRepo.save(test1);
-		Comment test2 = Comment.builder().campsiteName("(주)대산기획피케이씨").writer(member.getUsername()).content("댓글2")
+		Comment test2 = Comment.builder().campsiteName("(주)대산기획피케이씨").writer(member.getUsername()).content("이 캠핑장은 불만이 있었습니다. 시설이 부족하고 볼거리가 없었습니다.")
 				.build();
 		comRepo.save(test2);
 	}

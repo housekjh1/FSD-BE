@@ -13,6 +13,7 @@ public class CustomConfig {
 	CorsFilter corsFilter() {
 		CorsConfiguration config = new CorsConfiguration();
 		config.addAllowedOrigin("http://localhost:3000");
+		config.addAllowedOrigin("http://10.125.121.207:3000");
 		config.addAllowedMethod(CorsConfiguration.ALL);
 		config.addAllowedHeader(CorsConfiguration.ALL);
 		config.setAllowCredentials(true);

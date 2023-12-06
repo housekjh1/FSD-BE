@@ -36,6 +36,6 @@ public class Comment {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(updatable = false)
 	@Builder.Default
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
 	private Date createDate = new Date();
 }
