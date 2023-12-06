@@ -21,4 +21,14 @@ public class CommentService {
 	public List<Comment> getComment(String campsiteName) {
 		return comRepo.findByCampsiteName(campsiteName);
 	}
+
+	public String commentInput(String campsiteName, String writer, String content) {
+		comRepo.save(Comment.builder().campsiteName(campsiteName).writer(writer).content(content).build());
+		return "ok";
+	}
+
+	public String commentRemove(String seq) {
+		comRepo.deleteById(Long.parseLong(seq));
+		return "ok";
+	}
 }
