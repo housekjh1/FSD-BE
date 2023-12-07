@@ -8,5 +8,5 @@ import com.campsites.domain.Comment;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-	List<Comment> findByCampsiteName(String campsiteName);
+	List<Comment> findAllByCampsiteNameOrderBySeqDesc(String campsiteName);
 }

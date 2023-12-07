@@ -19,7 +19,7 @@ public class CommentService {
 	}
 
 	public List<Comment> getComment(String campsiteName) {
-		return comRepo.findByCampsiteName(campsiteName);
+		return comRepo.findAllByCampsiteNameOrderBySeqDesc(campsiteName);
 	}
 
 	public String commentInput(String campsiteName, String writer, String content) {
