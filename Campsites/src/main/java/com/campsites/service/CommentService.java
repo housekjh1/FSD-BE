@@ -27,6 +27,14 @@ public class CommentService {
 		return "ok";
 	}
 
+	public String commentUpdate(String seq, String content) {
+		Comment tmp = comRepo.findById(Long.parseLong(seq)).get();
+		tmp.setContent(content);
+		tmp.setEdited(true);
+		comRepo.save(tmp);
+		return "ok";
+	}
+
 	public String commentRemove(String seq) {
 		comRepo.deleteById(Long.parseLong(seq));
 		return "ok";

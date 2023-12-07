@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.campsites.domain.Comment;
@@ -31,7 +32,12 @@ public class CommentController {
 	public String commentInput(String campsiteName, String writer, String content) {
 		return comService.commentInput(campsiteName, writer, content);
 	}
-	
+
+	@PutMapping("/api/comment/update")
+	public String commentUpdate(String seq, String content) {
+		return comService.commentUpdate(seq, content);
+	}
+
 	@DeleteMapping("/api/comment/remove")
 	public String commentRemove(String seq) {
 		return comService.commentRemove(seq);

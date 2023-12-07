@@ -30,7 +30,9 @@ public class Comment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long seq;
+	@Column(updatable = false)
 	private String campsiteName;
+	@Column(updatable = false)
 	private String writer;
 	private String content;
 	@Temporal(TemporalType.TIMESTAMP)
@@ -42,5 +44,5 @@ public class Comment {
 	private boolean edited = false;
 	@Builder.Default
 	private boolean activated = true;
-	
+
 }
