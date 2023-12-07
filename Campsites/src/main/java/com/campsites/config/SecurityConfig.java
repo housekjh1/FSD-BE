@@ -37,7 +37,7 @@ public class SecurityConfig {
 		http.csrf(csrf -> csrf.disable());
 		
 		http.authorizeHttpRequests(auth->auth
-				.requestMatchers(new AntPathRequestMatcher("/api/**")).authenticated()
+//				.requestMatchers(new AntPathRequestMatcher("/api/**")).authenticated()
 				.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasRole("ADMIN")
 				.anyRequest().permitAll());
 
