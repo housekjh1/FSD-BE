@@ -38,4 +38,9 @@ public class Comment {
 	@Builder.Default
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
 	private Date createDate = new Date();
+	@Builder.Default
+	private boolean edited = false;
+	@Builder.Default
+	private boolean activated = true;
+	
 }
