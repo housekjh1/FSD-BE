@@ -42,7 +42,4 @@ public class Comment {
 	private Date createDate = new Date();
 	@Builder.Default
 	private boolean edited = false;
-	@Builder.Default
-	private boolean activated = true;
-
 }

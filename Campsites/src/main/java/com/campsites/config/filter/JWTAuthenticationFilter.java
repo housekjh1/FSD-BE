@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
 	private final AuthenticationManager authManager;
-
+	
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
@@ -47,6 +47,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			Authentication authResult) throws IOException, ServletException {
 
 		User user = (User) authResult.getPrincipal();
+		
 		String token = JWT.create()
 				.withExpiresAt(new Date(System.currentTimeMillis()*1000*60*10))
 				.withClaim("username", user.getUsername())

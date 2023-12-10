@@ -22,10 +22,10 @@ public class SecurityConfig {
 
 	@Autowired
 	private AuthenticationConfiguration authConfig;
-	
+
 	@Autowired
 	private MemberRepository memRepo;
-	
+
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -35,18 +35,18 @@ public class SecurityConfig {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
 		http.csrf(csrf -> csrf.disable());
-		
-		http.authorizeHttpRequests(auth->auth
+
+		http.authorizeHttpRequests(auth -> auth
 //				.requestMatchers(new AntPathRequestMatcher("/api/**")).authenticated()
 				.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasRole("ADMIN")
 				.anyRequest().permitAll());
 
-		http.formLogin(frm->frm.disable());
-		http.httpBasic(bs->bs.disable());
-		
+		http.formLogin(frm -> frm.disable());
+		http.httpBasic(bs -> bs.disable());
+
 		http.addFilter(new JWTAuthenticationFilter(authConfig.getAuthenticationManager()));
 		http.addFilterBefore(new JWTAuthorizationFilter(memRepo), AuthorizationFilter.class);
-		
+
 		return http.build();
 	}
 }
