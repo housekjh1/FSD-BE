@@ -18,10 +18,10 @@ public class CommentController {
 	@Autowired
 	private CommentService comService;
 
-	@GetMapping("/api/comments")
-	public List<Comment> getAll() {
-		return comService.getAll();
-	}
+//	@GetMapping("/api/comments")
+//	public List<Comment> getAll() {
+//		return comService.getAll();
+//	}
 
 	@PostMapping("/api/comment")
 	public List<Comment> getComment(String campsiteName) {

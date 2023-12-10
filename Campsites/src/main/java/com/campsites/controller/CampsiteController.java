@@ -16,10 +16,10 @@ public class CampsiteController {
 	@Autowired
 	private CampsiteService campService;
 
-	@GetMapping("/api/campsites")
-	public List<Campsite> getAll() {
-		return campService.getAll();
-	}
+//	@GetMapping("/api/campsites")
+//	public List<Campsite> getAll() {
+//		return campService.getAll();
+//	}
 
 	@GetMapping("/api/search/{keyword}")
 	public List<Campsite> getFromKeyword(@PathVariable String keyword) {
