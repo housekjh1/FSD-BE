@@ -40,7 +40,7 @@ public class MemberService {
 
 	public Response member(String token) {
 		// Map 객체로 보내는 방법도 검토하기
-		if (token == null || !token.startsWith("Bearer ")) {
+		if (token == null || !token.startsWith("Bearer ") || token.trim().equals("")) {
 			return Response.builder().key("error").value("invalidToken").build();
 		}
 		String jwtToken = token.replace("Bearer ", "");
