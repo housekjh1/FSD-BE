@@ -3,6 +3,7 @@ package com.campsites.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.campsites.domain.Response;
@@ -22,6 +23,11 @@ public class MemberController {
 	@PostMapping("/member")
 	public Response member(String token) {
 		return memService.member(token);
+	}
+
+	@PutMapping("/change")
+	public Response change(String username, String password, String passwordConfirm) {
+		return memService.change(username, password, passwordConfirm);
 	}
 
 	@DeleteMapping("/quit")

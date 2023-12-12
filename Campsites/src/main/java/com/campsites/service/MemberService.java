@@ -59,6 +59,20 @@ public class MemberService {
 		return Response.builder().key("success").value(tmp.getUsername()).build();
 	}
 
+	public Response change(String username, String password, String passwordConfirm) {
+		Optional<Member> opt = memRepo.findById(username);
+		if (!opt.isPresent()) {
+			return Response.builder().key("error").value("invalidMember").build();
+		}
+		if (!password.equals(passwordConfirm)) {
+			return Response.builder().key("error").value("passwordMatchFailure").build();
+		}
+		Member tmp = opt.get();
+		tmp.setPassword(encoder.encode(password));
+		memRepo.save(tmp);
+		return Response.builder().key("success").value("ok").build();
+	}
+
 	public Response quit(String username) {
 		// Map 객체로 보내는 방법도 검토하기
 		Optional<Member> opt = memRepo.findById(username);
