@@ -11,23 +11,23 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final OAuth2AuthorizedClientService authorizedClientService;
+	private final OAuth2AuthorizedClientService authorizedClientService;
 
-    public SecurityConfig(OAuth2AuthorizedClientService authorizedClientService) {
-        this.authorizedClientService = authorizedClientService;
-    }
+	public SecurityConfig(OAuth2AuthorizedClientService authorizedClientService) {
+		this.authorizedClientService = authorizedClientService;
+	}
 
-    @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .authorizeHttpRequests(authz -> authz
-                .requestMatchers("/**").permitAll()
-                .anyRequest().authenticated()
-            )
-            .oauth2Login(oauth2 -> oauth2
-                .successHandler(new CustomAuthenticationSuccessHandler(authorizedClientService))
-            );
+	@Bean
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http.csrf(csrf -> csrf.disable());
 
-        return http.build();
-    }
+		http.authorizeHttpRequests(authz -> authz.requestMatchers("/**").permitAll().anyRequest().authenticated())
+				.oauth2Login(oauth2 -> oauth2
+						.successHandler(new CustomAuthenticationSuccessHandler(authorizedClientService)));
+
+		http.formLogin(frm -> frm.disable());
+		http.httpBasic(bs -> bs.disable());
+
+		return http.build();
+	}
 }
