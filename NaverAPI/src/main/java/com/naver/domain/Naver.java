@@ -1,5 +1,8 @@
 package com.naver.domain;
 
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,4 +27,8 @@ public class Naver {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long seq;
 	private Float result;
+	@Column(name = "a_datetime")
+	private LocalDateTime aDateTime;
+	@Column(name = "a_values")
+	private String aValues;
 }

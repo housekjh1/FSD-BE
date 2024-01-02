@@ -1,5 +1,7 @@
 package com.naver.controller;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +21,18 @@ public class TestController {
 	@Autowired
 	private NaverService naverServ;
 
-	@GetMapping("/flask")
-    public String callFlaskService(@RequestParam(value = "a", defaultValue = "0") Float a,
-                                   @RequestParam(value = "b", defaultValue = "0") Float b) {
-        String flaskServiceUrl = "http://localhost:5000/sum?a=" + a + "&b=" + b;
-        Map<String, Object> response = restTemplate.getForObject(flaskServiceUrl, Map.class);
-        Float result = ((Number) response.get("result")).floatValue();
-        return naverServ.saveResult(result);
-    }
+	@GetMapping("/sum")
+	public String callFlaskService(@RequestParam(value = "a", defaultValue = "0") Float a,
+			@RequestParam(value = "b", defaultValue = "0") Float b) {
+		String flaskServiceUrl = "http://localhost:5000/sum?a=" + a + "&b=" + b;
+		Map<String, Object> response = restTemplate.getForObject(flaskServiceUrl, Map.class);
+		Float result = ((Number) response.get("result")).floatValue();
+		return naverServ.saveResult(result);
+	}
+
+	@GetMapping("/test")
+	public String testFlaskService(@RequestParam(value = "date") LocalDate date) {
+		LocalDateTime dateTime = date.atStartOfDay();
+		return naverServ.getValuesAndSendToFlask(dateTime);
+	}
 }
