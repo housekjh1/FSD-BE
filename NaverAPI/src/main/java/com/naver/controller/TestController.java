@@ -21,18 +21,9 @@ public class TestController {
 	@Autowired
 	private NaverService naverServ;
 
-	@GetMapping("/sum")
-	public String callFlaskService(@RequestParam(value = "a", defaultValue = "0") Float a,
-			@RequestParam(value = "b", defaultValue = "0") Float b) {
-		String flaskServiceUrl = "http://localhost:5000/sum?a=" + a + "&b=" + b;
-		Map<String, Object> response = restTemplate.getForObject(flaskServiceUrl, Map.class);
-		Float result = ((Number) response.get("result")).floatValue();
-		return naverServ.saveResult(result);
-	}
-
-	@GetMapping("/test")
-	public String testFlaskService(@RequestParam(value = "date") LocalDate date) {
+	@GetMapping("/predict")
+	public String testFlaskService(String pool, @RequestParam(value = "date") LocalDate date) {
 		LocalDateTime dateTime = date.atStartOfDay();
-		return naverServ.getValuesAndSendToFlask(dateTime);
+		return naverServ.getValuesAndSendToFlask(pool, dateTime);
 	}
 }
