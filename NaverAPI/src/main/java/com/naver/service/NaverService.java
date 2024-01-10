@@ -1,6 +1,7 @@
 package com.naver.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.naver.domain.DTO.PoolADTO;
+import com.naver.domain.PoolA;
 import com.naver.persistence.ARepository;
 
 @Service
@@ -27,19 +28,25 @@ public class NaverService {
 
 	public String getValuesAndSendToFlask(String pool, LocalDateTime date) {
 
-		// 상위 90개 결과를 가져오기 위한 Pageable 객체 생성
-		Pageable topNinety = PageRequest.of(0, 90, Sort.by("dateTime").descending());
-		List<PoolADTO> valuesA = null;
+		Pageable previousDataPageable = PageRequest.of(0, 144, Sort.by("dateTime").descending());
+		Pageable nextDataPageable = PageRequest.of(0, 144, Sort.by("dateTime"));
+
+		List<PoolA> values = new ArrayList<>();
+
 		Map<String, Object> requestData = new HashMap<>();
 
 		if (pool.equals("A")) {
+			List<PoolA> beforeData = aRepo.findBeforeDate(date, previousDataPageable);
 
-			valuesA = aRepo.findA(date, topNinety);
+			// 역정렬된 데이터를 오름차순으로 재정렬
+			Collections.reverse(beforeData);
 
-			// 결과를 역정렬하여 오름차순으로 변경
-			Collections.reverse(valuesA);
+			List<PoolA> fromData = aRepo.findFromDate(date, nextDataPageable);
 
-			requestData.put("values", valuesA);
+			values.addAll(beforeData);
+			values.addAll(fromData);
+
+			requestData.put("values", values);
 		} else {
 			return "error";
 		}

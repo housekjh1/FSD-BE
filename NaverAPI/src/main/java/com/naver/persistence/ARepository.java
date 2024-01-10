@@ -8,9 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.naver.domain.PoolA;
-import com.naver.domain.DTO.PoolADTO;
 
 public interface ARepository extends JpaRepository<PoolA, Long> {
-	@Query("SELECT a.dateTime, a.data1, a.data2, a.data3, a.data4 FROM PoolA a WHERE a.dateTime < :date ORDER BY a.dateTime DESC")
-	List<PoolADTO> findA(LocalDateTime date, Pageable pageable);
+
+	@Query("SELECT a FROM PoolA a WHERE a.dateTime < :date ORDER BY a.dateTime DESC")
+	List<PoolA> findBeforeDate(LocalDateTime date, Pageable pageable);
+
+	@Query("SELECT a FROM PoolA a WHERE a.dateTime >= :date ORDER BY a.dateTime")
+	List<PoolA> findFromDate(LocalDateTime date, Pageable pageable);
 }
