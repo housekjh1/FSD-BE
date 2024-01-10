@@ -52,7 +52,7 @@ public class NaverService {
 		}
 
 		// Flask 서버의 URL
-		String flaskUrl = "http://localhost:5000/predict";
+		String flaskUrl = "http://10.125.121.208:5000/predict";
 
 		// 전송할 데이터 맵 생성
 		requestData.put("pool", pool);
