@@ -16,8 +16,32 @@ import org.springframework.web.client.RestTemplate;
 
 import com.naver.domain.LogTable;
 import com.naver.domain.PoolA;
+import com.naver.domain.PoolG;
+import com.naver.domain.PoolJ;
+import com.naver.domain.PoolL;
+import com.naver.domain.PoolM;
+import com.naver.domain.PoolN;
+import com.naver.domain.PoolP;
+import com.naver.domain.PoolQ;
+import com.naver.domain.PoolS;
+import com.naver.domain.PoolT;
+import com.naver.domain.PoolU;
+import com.naver.domain.PoolV;
+import com.naver.domain.PoolW;
 import com.naver.persistence.ARepository;
+import com.naver.persistence.GRepository;
+import com.naver.persistence.JRepository;
+import com.naver.persistence.LRepository;
 import com.naver.persistence.LogRepository;
+import com.naver.persistence.MRepository;
+import com.naver.persistence.NRepository;
+import com.naver.persistence.PRepository;
+import com.naver.persistence.QRepository;
+import com.naver.persistence.SRepository;
+import com.naver.persistence.TRepository;
+import com.naver.persistence.URepository;
+import com.naver.persistence.VRepository;
+import com.naver.persistence.WRepository;
 
 @Service
 public class NaverService {
@@ -29,6 +53,42 @@ public class NaverService {
 	private ARepository aRepo;
 
 	@Autowired
+	private GRepository gRepo;
+
+	@Autowired
+	private JRepository jRepo;
+
+	@Autowired
+	private LRepository lRepo;
+
+	@Autowired
+	private MRepository mRepo;
+
+	@Autowired
+	private NRepository nRepo;
+
+	@Autowired
+	private PRepository pRepo;
+
+	@Autowired
+	private QRepository qRepo;
+
+	@Autowired
+	private SRepository sRepo;
+
+	@Autowired
+	private TRepository tRepo;
+
+	@Autowired
+	private URepository uRepo;
+
+	@Autowired
+	private VRepository vRepo;
+
+	@Autowired
+	private WRepository wRepo;
+
+	@Autowired
 	private RestTemplate restTemplate;
 
 	public String getValuesAndSendToFlask(String pool, LocalDateTime date) {
@@ -36,7 +96,19 @@ public class NaverService {
 		Pageable previousDataPageable = PageRequest.of(0, 144, Sort.by("dateTime").descending());
 		Pageable nextDataPageable = PageRequest.of(0, 144, Sort.by("dateTime"));
 
-		List<PoolA> values = new ArrayList<>();
+		List<PoolA> aValues = new ArrayList<>();
+		List<PoolG> gValues = new ArrayList<>();
+		List<PoolJ> jValues = new ArrayList<>();
+		List<PoolL> lValues = new ArrayList<>();
+		List<PoolM> mValues = new ArrayList<>();
+		List<PoolN> nValues = new ArrayList<>();
+		List<PoolP> pValues = new ArrayList<>();
+		List<PoolQ> qValues = new ArrayList<>();
+		List<PoolS> sValues = new ArrayList<>();
+		List<PoolT> tValues = new ArrayList<>();
+		List<PoolU> uValues = new ArrayList<>();
+		List<PoolV> vValues = new ArrayList<>();
+		List<PoolW> wValues = new ArrayList<>();
 
 		Map<String, Object> requestData = new HashMap<>();
 
@@ -48,10 +120,154 @@ public class NaverService {
 
 			List<PoolA> fromData = aRepo.findFromDate(date, nextDataPageable);
 
-			values.addAll(beforeData);
-			values.addAll(fromData);
+			aValues.addAll(beforeData);
+			aValues.addAll(fromData);
 
-			requestData.put("values", values);
+			requestData.put("values", aValues);
+		} else if (pool.equals("G")) {
+			List<PoolG> beforeData = gRepo.findBeforeDate(date, previousDataPageable);
+
+			// 역정렬된 데이터를 오름차순으로 재정렬
+			Collections.reverse(beforeData);
+
+			List<PoolG> fromData = gRepo.findFromDate(date, nextDataPageable);
+
+			gValues.addAll(beforeData);
+			gValues.addAll(fromData);
+
+			requestData.put("values", gValues);
+		} else if (pool.equals("J")) {
+			List<PoolJ> beforeData = jRepo.findBeforeDate(date, previousDataPageable);
+
+			// 역정렬된 데이터를 오름차순으로 재정렬
+			Collections.reverse(beforeData);
+
+			List<PoolJ> fromData = jRepo.findFromDate(date, nextDataPageable);
+
+			jValues.addAll(beforeData);
+			jValues.addAll(fromData);
+
+			requestData.put("values", jValues);
+		} else if (pool.equals("L")) {
+			List<PoolL> beforeData = lRepo.findBeforeDate(date, previousDataPageable);
+
+			// 역정렬된 데이터를 오름차순으로 재정렬
+			Collections.reverse(beforeData);
+
+			List<PoolL> fromData = lRepo.findFromDate(date, nextDataPageable);
+
+			lValues.addAll(beforeData);
+			lValues.addAll(fromData);
+
+			requestData.put("values", lValues);
+		} else if (pool.equals("M")) {
+			List<PoolM> beforeData = mRepo.findBeforeDate(date, previousDataPageable);
+
+			// 역정렬된 데이터를 오름차순으로 재정렬
+			Collections.reverse(beforeData);
+
+			List<PoolM> fromData = mRepo.findFromDate(date, nextDataPageable);
+
+			mValues.addAll(beforeData);
+			mValues.addAll(fromData);
+
+			requestData.put("values", mValues);
+		} else if (pool.equals("N")) {
+			List<PoolN> beforeData = nRepo.findBeforeDate(date, previousDataPageable);
+
+			// 역정렬된 데이터를 오름차순으로 재정렬
+			Collections.reverse(beforeData);
+
+			List<PoolN> fromData = nRepo.findFromDate(date, nextDataPageable);
+
+			nValues.addAll(beforeData);
+			nValues.addAll(fromData);
+
+			requestData.put("values", nValues);
+		} else if (pool.equals("P")) {
+			List<PoolP> beforeData = pRepo.findBeforeDate(date, previousDataPageable);
+
+			// 역정렬된 데이터를 오름차순으로 재정렬
+			Collections.reverse(beforeData);
+
+			List<PoolP> fromData = pRepo.findFromDate(date, nextDataPageable);
+
+			pValues.addAll(beforeData);
+			pValues.addAll(fromData);
+
+			requestData.put("values", pValues);
+		} else if (pool.equals("Q")) {
+			List<PoolQ> beforeData = qRepo.findBeforeDate(date, previousDataPageable);
+
+			// 역정렬된 데이터를 오름차순으로 재정렬
+			Collections.reverse(beforeData);
+
+			List<PoolQ> fromData = qRepo.findFromDate(date, nextDataPageable);
+
+			qValues.addAll(beforeData);
+			qValues.addAll(fromData);
+
+			requestData.put("values", qValues);
+		} else if (pool.equals("S")) {
+			List<PoolS> beforeData = sRepo.findBeforeDate(date, previousDataPageable);
+
+			// 역정렬된 데이터를 오름차순으로 재정렬
+			Collections.reverse(beforeData);
+
+			List<PoolS> fromData = sRepo.findFromDate(date, nextDataPageable);
+
+			sValues.addAll(beforeData);
+			sValues.addAll(fromData);
+
+			requestData.put("values", sValues);
+		} else if (pool.equals("T")) {
+			List<PoolT> beforeData = tRepo.findBeforeDate(date, previousDataPageable);
+
+			// 역정렬된 데이터를 오름차순으로 재정렬
+			Collections.reverse(beforeData);
+
+			List<PoolT> fromData = tRepo.findFromDate(date, nextDataPageable);
+
+			tValues.addAll(beforeData);
+			tValues.addAll(fromData);
+
+			requestData.put("values", tValues);
+		} else if (pool.equals("U")) {
+			List<PoolU> beforeData = uRepo.findBeforeDate(date, previousDataPageable);
+
+			// 역정렬된 데이터를 오름차순으로 재정렬
+			Collections.reverse(beforeData);
+
+			List<PoolU> fromData = uRepo.findFromDate(date, nextDataPageable);
+
+			uValues.addAll(beforeData);
+			uValues.addAll(fromData);
+
+			requestData.put("values", uValues);
+		} else if (pool.equals("V")) {
+			List<PoolV> beforeData = vRepo.findBeforeDate(date, previousDataPageable);
+
+			// 역정렬된 데이터를 오름차순으로 재정렬
+			Collections.reverse(beforeData);
+
+			List<PoolV> fromData = vRepo.findFromDate(date, nextDataPageable);
+
+			vValues.addAll(beforeData);
+			vValues.addAll(fromData);
+
+			requestData.put("values", vValues);
+		} else if (pool.equals("W")) {
+			List<PoolW> beforeData = wRepo.findBeforeDate(date, previousDataPageable);
+
+			// 역정렬된 데이터를 오름차순으로 재정렬
+			Collections.reverse(beforeData);
+
+			List<PoolW> fromData = wRepo.findFromDate(date, nextDataPageable);
+
+			wValues.addAll(beforeData);
+			wValues.addAll(fromData);
+
+			requestData.put("values", wValues);
 		} else {
 			return "error";
 		}
