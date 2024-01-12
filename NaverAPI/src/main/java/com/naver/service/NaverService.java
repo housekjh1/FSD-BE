@@ -14,11 +14,16 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.naver.domain.LogTable;
 import com.naver.domain.PoolA;
 import com.naver.persistence.ARepository;
+import com.naver.persistence.LogRepository;
 
 @Service
 public class NaverService {
+
+	@Autowired
+	private LogRepository logRepo;
 
 	@Autowired
 	private ARepository aRepo;
@@ -52,12 +57,25 @@ public class NaverService {
 		}
 
 		// Flask 서버의 URL
-		String flaskUrl = "http://10.125.121.208:5000/predict";
+		String flaskUrl = "http://localhost:5000/predict";
 
 		// 전송할 데이터 맵 생성
 		requestData.put("pool", pool);
 
 		// Flask 서버로 데이터 전송 후 결과 반환
 		return restTemplate.postForObject(flaskUrl, requestData, String.class);
+	}
+
+	public List<LogTable> getLog() {
+		return logRepo.findAll();
+	}
+
+	public String setLog(LogTable log) {
+		try {
+			logRepo.save(log);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "ok";
 	}
 }
