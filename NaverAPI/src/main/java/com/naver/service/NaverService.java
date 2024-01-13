@@ -16,11 +16,19 @@ import org.springframework.web.client.RestTemplate;
 
 import com.naver.domain.LogTable;
 import com.naver.domain.PoolA;
+import com.naver.domain.PoolB;
+import com.naver.domain.PoolC;
+import com.naver.domain.PoolD;
+import com.naver.domain.PoolE;
+import com.naver.domain.PoolF;
 import com.naver.domain.PoolG;
+import com.naver.domain.PoolH;
+import com.naver.domain.PoolI;
 import com.naver.domain.PoolJ;
 import com.naver.domain.PoolL;
 import com.naver.domain.PoolM;
 import com.naver.domain.PoolN;
+import com.naver.domain.PoolO;
 import com.naver.domain.PoolP;
 import com.naver.domain.PoolQ;
 import com.naver.domain.PoolS;
@@ -29,12 +37,20 @@ import com.naver.domain.PoolU;
 import com.naver.domain.PoolV;
 import com.naver.domain.PoolW;
 import com.naver.persistence.ARepository;
+import com.naver.persistence.BRepository;
+import com.naver.persistence.CRepository;
+import com.naver.persistence.DRepository;
+import com.naver.persistence.ERepository;
+import com.naver.persistence.FRepository;
 import com.naver.persistence.GRepository;
+import com.naver.persistence.HRepository;
+import com.naver.persistence.IRepository;
 import com.naver.persistence.JRepository;
 import com.naver.persistence.LRepository;
 import com.naver.persistence.LogRepository;
 import com.naver.persistence.MRepository;
 import com.naver.persistence.NRepository;
+import com.naver.persistence.ORepository;
 import com.naver.persistence.PRepository;
 import com.naver.persistence.QRepository;
 import com.naver.persistence.SRepository;
@@ -53,7 +69,28 @@ public class NaverService {
 	private ARepository aRepo;
 
 	@Autowired
+	private BRepository bRepo;
+
+	@Autowired
+	private CRepository cRepo;
+
+	@Autowired
+	private DRepository dRepo;
+
+	@Autowired
+	private ERepository eRepo;
+
+	@Autowired
+	private FRepository fRepo;
+
+	@Autowired
 	private GRepository gRepo;
+
+	@Autowired
+	private HRepository hRepo;
+
+	@Autowired
+	private IRepository iRepo;
 
 	@Autowired
 	private JRepository jRepo;
@@ -66,6 +103,9 @@ public class NaverService {
 
 	@Autowired
 	private NRepository nRepo;
+
+	@Autowired
+	private ORepository oRepo;
 
 	@Autowired
 	private PRepository pRepo;
@@ -97,11 +137,19 @@ public class NaverService {
 		Pageable nextDataPageable = PageRequest.of(0, 144, Sort.by("dateTime"));
 
 		List<PoolA> aValues = new ArrayList<>();
+		List<PoolB> bValues = new ArrayList<>();
+		List<PoolC> cValues = new ArrayList<>();
+		List<PoolD> dValues = new ArrayList<>();
+		List<PoolE> eValues = new ArrayList<>();
+		List<PoolF> fValues = new ArrayList<>();
 		List<PoolG> gValues = new ArrayList<>();
+		List<PoolH> hValues = new ArrayList<>();
+		List<PoolI> iValues = new ArrayList<>();
 		List<PoolJ> jValues = new ArrayList<>();
 		List<PoolL> lValues = new ArrayList<>();
 		List<PoolM> mValues = new ArrayList<>();
 		List<PoolN> nValues = new ArrayList<>();
+		List<PoolO> oValues = new ArrayList<>();
 		List<PoolP> pValues = new ArrayList<>();
 		List<PoolQ> qValues = new ArrayList<>();
 		List<PoolS> sValues = new ArrayList<>();
@@ -124,6 +172,66 @@ public class NaverService {
 			aValues.addAll(fromData);
 
 			requestData.put("values", aValues);
+		} else if (pool.equals("B")) {
+			List<PoolB> beforeData = bRepo.findBeforeDate(date, previousDataPageable);
+
+			// 역정렬된 데이터를 오름차순으로 재정렬
+			Collections.reverse(beforeData);
+
+			List<PoolB> fromData = bRepo.findFromDate(date, nextDataPageable);
+
+			bValues.addAll(beforeData);
+			bValues.addAll(fromData);
+
+			requestData.put("values", bValues);
+		} else if (pool.equals("C")) {
+			List<PoolC> beforeData = cRepo.findBeforeDate(date, previousDataPageable);
+
+			// 역정렬된 데이터를 오름차순으로 재정렬
+			Collections.reverse(beforeData);
+
+			List<PoolC> fromData = cRepo.findFromDate(date, nextDataPageable);
+
+			cValues.addAll(beforeData);
+			cValues.addAll(fromData);
+
+			requestData.put("values", cValues);
+		} else if (pool.equals("D")) {
+			List<PoolD> beforeData = dRepo.findBeforeDate(date, previousDataPageable);
+
+			// 역정렬된 데이터를 오름차순으로 재정렬
+			Collections.reverse(beforeData);
+
+			List<PoolD> fromData = dRepo.findFromDate(date, nextDataPageable);
+
+			dValues.addAll(beforeData);
+			dValues.addAll(fromData);
+
+			requestData.put("values", dValues);
+		} else if (pool.equals("E")) {
+			List<PoolE> beforeData = eRepo.findBeforeDate(date, previousDataPageable);
+
+			// 역정렬된 데이터를 오름차순으로 재정렬
+			Collections.reverse(beforeData);
+
+			List<PoolE> fromData = eRepo.findFromDate(date, nextDataPageable);
+
+			eValues.addAll(beforeData);
+			eValues.addAll(fromData);
+
+			requestData.put("values", eValues);
+		} else if (pool.equals("F")) {
+			List<PoolF> beforeData = fRepo.findBeforeDate(date, previousDataPageable);
+
+			// 역정렬된 데이터를 오름차순으로 재정렬
+			Collections.reverse(beforeData);
+
+			List<PoolF> fromData = fRepo.findFromDate(date, nextDataPageable);
+
+			fValues.addAll(beforeData);
+			fValues.addAll(fromData);
+
+			requestData.put("values", fValues);
 		} else if (pool.equals("G")) {
 			List<PoolG> beforeData = gRepo.findBeforeDate(date, previousDataPageable);
 
@@ -184,6 +292,18 @@ public class NaverService {
 			nValues.addAll(fromData);
 
 			requestData.put("values", nValues);
+		} else if (pool.equals("O")) {
+			List<PoolO> beforeData = oRepo.findBeforeDate(date, previousDataPageable);
+
+			// 역정렬된 데이터를 오름차순으로 재정렬
+			Collections.reverse(beforeData);
+
+			List<PoolO> fromData = oRepo.findFromDate(date, nextDataPageable);
+
+			oValues.addAll(beforeData);
+			oValues.addAll(fromData);
+
+			requestData.put("values", oValues);
 		} else if (pool.equals("P")) {
 			List<PoolP> beforeData = pRepo.findBeforeDate(date, previousDataPageable);
 
