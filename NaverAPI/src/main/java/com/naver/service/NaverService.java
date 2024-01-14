@@ -244,6 +244,30 @@ public class NaverService {
 			gValues.addAll(fromData);
 
 			requestData.put("values", gValues);
+		} else if (pool.equals("H")) {
+			List<PoolH> beforeData = hRepo.findBeforeDate(date, previousDataPageable);
+
+			// 역정렬된 데이터를 오름차순으로 재정렬
+			Collections.reverse(beforeData);
+
+			List<PoolH> fromData = hRepo.findFromDate(date, nextDataPageable);
+
+			hValues.addAll(beforeData);
+			hValues.addAll(fromData);
+
+			requestData.put("values", hValues);
+		} else if (pool.equals("I")) {
+			List<PoolI> beforeData = iRepo.findBeforeDate(date, previousDataPageable);
+
+			// 역정렬된 데이터를 오름차순으로 재정렬
+			Collections.reverse(beforeData);
+
+			List<PoolI> fromData = iRepo.findFromDate(date, nextDataPageable);
+
+			iValues.addAll(beforeData);
+			iValues.addAll(fromData);
+
+			requestData.put("values", iValues);
 		} else if (pool.equals("J")) {
 			List<PoolJ> beforeData = jRepo.findBeforeDate(date, previousDataPageable);
 
