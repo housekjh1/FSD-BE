@@ -427,7 +427,7 @@ public class NaverService {
 	}
 
 	public List<LogTable> getLog() {
-		return logRepo.findAll();
+		return logRepo.findAllByOrderBySeqDesc();
 	}
 
 	public String setLog(LogTable log) {
